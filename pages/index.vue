@@ -1,4 +1,4 @@
-<template>
+<template class="bodyHome">
 <v-container class="container">
   <v-layout
     column
@@ -62,46 +62,18 @@
     </v-card>
   </v-layout>
   <!-- THREE CARDS -->
-  <v-layout row justify-center class="groupThreeCards">
-    <!-- CARD ONE -->
-    <v-card class="threeCards">
-      <v-img
-        src="/kettleBell.jpg"
-        max-width="325"
-        max-height="230"
-      >
-      </v-img>
-      <h2>
-        This is sample text
-      </h2>
-    </v-card>
-    <!-- CARD TWO -->
-    <v-card class="threeCards">
-      <v-img
-        src="/legsAir.jpg"
-        max-width="325"
-        min-height="230"
-      >
-      </v-img>
-      <h2>
-        This is sample text
-      </h2>
-    </v-card>
-    <!-- CARD THREE -->
-    <v-card class="threeCards">
-      <v-img
-        src="/eldarRings.jpg"
-        max-width="325"
-        min-height="230"
-      >
-      </v-img>
-      <h2>
-        This is sample text
-      </h2>
-    </v-card>
-  </v-layout>
   <v-layout>
-    <articleCards />
+    <articleCards class="transform"
+      v-for="article in articles.slice(1,4)"
+              :key="article.id"
+              :id="article.id"
+              :title="article.title"
+              :shortDescription="article.shortDescription"
+              :posted="article.posted"
+              :mainImage="article.mainImage"
+              :description="article.description"
+              :secondDescription="article.secondDescription"
+              :secondImage="article.secondImage" />
   </v-layout>
   </v-container>
 </template>
@@ -128,14 +100,10 @@ components: {
         articles: res.data.stories.map(ap => {
           return {
             id: ap.slug,
-            title: ap.content.title,
+            title: ap.content.Title,
             posted: ap.content.posted,
             shortDescription: ap.content.shortDescription,
-            image: ap.content.mainImage,
-            description: ap.content.description,
-            firstImage: ap.content.firstImage,
-            descriptionTwo: ap.content.secondDescription,
-            secondImage: ap.content.secondImage,
+            mainImage: ap.content.mainImage
           }
         })
       }
@@ -183,5 +151,8 @@ components: {
 .groupThreeCards {
   margin-top: 42px;
   max-width: 1200px;
+}
+.bodyHome {
+  background: white !important;
 }
 </style>

@@ -4,7 +4,7 @@
         <v-layout class="hidden-sm-and-down" >
             <v-flex lg12 xl12>
                 <!-- FEATURE IMAGE -->
-                    <v-layout v-if="image" class="article-image" :style="{backgroundImage: 'url('+ image +')'}">
+                    <v-layout v-if="mainImage" class="article-image" :style="{backgroundImage: 'url('+ mainImage +')'}">
                     </v-layout>
                     <v-layout justify-start>
                             <v-card class="introCard--bigScreens">
@@ -51,7 +51,7 @@
                         </v-card> 
                 </v-layout>
                 <!-- FEATURE IMAGE -->
-                <div class="article-image--mobile" :style="{backgroundImage: 'url('+ image +')'}">
+                <div class="article-image--mobile" :style="{backgroundImage: 'url('+ mainImage +')'}">
                 </div>
                 <!-- SUBS FEATURED -->
                 <v-layout justify-center v-if="posted">
@@ -105,7 +105,7 @@ export default {
                 title: res.data.story.content.title,
                 posted: res.data.story.content.posted,
                 intro: res.data.story.content.shortDescription,
-                image: res.data.story.content.mainImage,
+                mainImage: res.data.story.content.mainImage,
                 description: res.data.story.content.description,
                 firstImage: res.data.story.content.firstImage,
                 descriptionTwo: res.data.story.content.secondDescription,

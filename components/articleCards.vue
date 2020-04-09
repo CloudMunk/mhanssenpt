@@ -1,58 +1,62 @@
 <template>
         <nuxt-link 
             :to="id"
-            class="noUnderline"
+            class="textDeco"
         >
-        <v-layout justify-start>
+        <v-layout row class="groupThreeCards">
             <!-- BIG SCREENS -->
-            <v-flex xs12 sm12 class="mt-5 hidden-sm-and-down">
-                    <v-card
-                        min-width="534"
-                        max-width="534"
-                        outlined
-                        class="backgroundLinear"
-                    >
-                        <v-list-item two-line>
-                            <v-list-item-content>
-                                <h2>{{ title }}</h2>
-                                    <p class="mt-3 list-item-description">
-                                        {{ intro }} 
-                                    </p>
-                                </v-list-item-content>
+                    <v-card class="threeCards" min-height="490" max-height="490">
                         <v-img 
+                            max-width="325"
+                            min-width="325"
+                            max-height="230"
                             :src="mainImage"
-                            class="articleImages"
-                            contain
                         >
                         </v-img>
-                        </v-list-item>
-                        <nuxt-link 
-                            :to="id"
-                            class="noUnderline"
-                        >
-                        <v-card-actions>    
-                                <v-btn color="#38ef7d" text>Read More</v-btn>
-                        </v-card-actions>
-                        </nuxt-link>
+                        <v-layout column >
+                            <v-list-item two-line>
+                            <v-list-item-content>
+                                <h2>
+                                    {{ title }}
+                                </h2>
+                                <p class="mt-3">
+                                    {{ posted }} 
+                                </p>
+                                <p class="mt-3">
+                                    {{ shortDescription }} 
+                                </p>
+                            </v-list-item-content>
+                            </v-list-item>
+                            <nuxt-link 
+                                :to="id"
+                                class="textDeco"
+                            >
+                                <v-card-actions>    
+                                        <v-btn color="#38ef7d" class="readMore" text>Read More</v-btn>
+                                </v-card-actions>
+                            </nuxt-link>
+                        </v-layout>
                     </v-card>
-            </v-flex>
+        </v-layout>
+        <v-layout class="hidden-md-and-up">
             <!-- MOBILE SCREEN -->
             <v-flex xs12 sm12 class="mt-5 hidden-sm-and-up">
                     <v-card
-                        min-width="320"
-                        max-width="320"
-                        outlined
-                        class="backgroundLinear mobileCard"
+                        max-width="325"
+                        max-height="230"
                     >
                         <v-list-item two-line>
                             <v-list-item-content>
                                 <h2 class="titleMobile">{{ title }}</h2>
+                                <p class="mt-3 list-item-description">
+                                        {{ posted }} 
+                                </p>
                                 <p class="mt-3 list-item-description--mobile">
-                                    {{ intro }} 
+                                    {{ shortDescription }} 
                                 </p>
                             </v-list-item-content>
                         <v-img 
-                            :src="image"
+                            :src="mainImage"
                             class="articleImages--mobile"
                             contain
                         >
@@ -81,19 +85,11 @@ export default {
           type: String,
           required: true
       },
+       shortDescription: {
+          type: String,
+          required: true
+      },
       mainImage: {
-          type: String,
-          required: true
-      },
-      description: {
-          type: String,
-          required: true
-      },
-      descriptionTwo: {
-          type: String,
-          required: false
-      },
-      secondImage: {
           type: String,
           required: true
       },
@@ -101,51 +97,26 @@ export default {
           type: String,
           required: true
       },
-      shortDescription: {
-          type: String,
-          required: true
-      }
   }
 }
 </script>
 
 <style scoped>
-.backgroundLinear {
-    background-color: #121030 !important;
+.threeCards {
+  margin-left: 20px;
+  margin-right: 20px;
+  max-width: 330px;
 }
-.noUnderline {
+.groupThreeCards {
+  margin-left: 10px;
+  margin-top: 42px;
+  max-width: 1200px;
+}
+.textDeco {
     text-decoration: none;
 }
-.articleImages {
-    max-height: 140px;
-    max-width: 170px;
-    min-height: 120px !important;
-    min-width: 150px !important;
-    margin-top: 5px;
-}
-.list-item-description {
-    font-size: 12px;
-    max-width: 350px;
-    white-space: pre-line;
-}
-.list-item-description--mobile {
-    font-size: 8px;
-    max-width: 350px;
-    white-space: pre-line;
-}
-.articleImages--mobile {
-    max-height: 80px;
-    max-width: 80px;
-    margin-top: -15px;
-}
-.titleMobile {
-    font-size: 12px;
-}
-.buttonMobile {
-    font-size: 8px;
-    margin-top: -30px;
-}
-.mobileCard {
-    height: auto;
+.readMore {
+    position: absolute;
+    bottom: 0;
 }
 </style>
