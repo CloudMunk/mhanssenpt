@@ -91,11 +91,17 @@ module.exports = {
   /*
   ** Build configuration
   */
-  build: {
-    /*
-    ** You can extend webpack config here
-    */
-    extend (config, ctx) {
-    }
+ generate: {
+  fallback: '404.html',
+  routes: this.dynamicRoutes,
+ 
+build: {
+  
+  },
+  /*
+  ** You can extend webpack config here
+  */
+  extend (config, ctx) {
   }
+}
 }
