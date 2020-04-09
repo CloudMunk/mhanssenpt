@@ -37,7 +37,7 @@
             </v-flex>  
         </v-layout>  
         <!-- MOBILE SCREENS -->
-        <v-layout class="hidden-md-and-up">
+        <!-- <v-layout class="hidden-md-and-up">
             <v-flex lg12 xl12>
                 <v-layout justify-center>
                     <h1 class="mt-5 titleMobile"> {{ title }} </h1>
@@ -68,7 +68,7 @@
                         <v-layout v-if="secondImage">
                             <!-- SECOND IMAGE -->
                             <v-img 
-                                class=""
+                                
                                 :src="secondImage"
                             >
                             </v-img>
@@ -83,7 +83,7 @@
                     </v-flex>
                 </v-layout>
             </v-flex>
-        </v-layout>
+        <!-- </v-layout> -->
     </v-container> 
     
 </template>
