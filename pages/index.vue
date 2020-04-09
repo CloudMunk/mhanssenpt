@@ -1,92 +1,187 @@
 <template>
+<v-container class="container">
   <v-layout
     column
     justify-center
     align-center
+    class="underFold"
   >
-    <v-flex
-      xs12
-      sm8
-      md6
+    <!-- NAVBAR LINKS -->
+    <v-layout
+      row
+      justify-start
+      class="navbarTitles"
     >
-      <div class="text-center">
-        <logo />
-        <vuetify-logo />
-      </div>
-      <v-card>
-        <v-card-title class="headline">
-          Welcome to the Vuetify + Nuxt.js template
-        </v-card-title>
-        <v-card-text>
-          <p>Vuetify is a progressive Material Design component framework for Vue.js. It was designed to empower developers to create amazing applications.</p>
-          <p>
-            For more information on Vuetify, check out the <a
-              href="https://vuetifyjs.com"
-              target="_blank"
-            >
-              documentation
-            </a>.
-          </p>
-          <p>
-            If you have questions, please join the official <a
-              href="https://chat.vuetifyjs.com/"
-              target="_blank"
-              title="chat"
-            >
-              discord
-            </a>.
-          </p>
-          <p>
-            Find a bug? Report it on the github <a
-              href="https://github.com/vuetifyjs/vuetify/issues"
-              target="_blank"
-              title="contribute"
-            >
-              issue board
-            </a>.
-          </p>
-          <p>Thank you for developing with Vuetify and I look forward to bringing more exciting features in the future.</p>
-          <div class="text-xs-right">
-            <em><small>&mdash; John Leider</small></em>
-          </div>
-          <hr class="my-3">
-          <a
-            href="https://nuxtjs.org/"
-            target="_blank"
-          >
-            Nuxt Documentation
-          </a>
-          <br>
-          <a
-            href="https://github.com/nuxt/nuxt.js"
-            target="_blank"
-          >
-            Nuxt GitHub
-          </a>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer />
+        <nuxt-link to="/" class="navBarLinks">Home</nuxt-link>
+        <nuxt-link to="About" class="navBarLinks blogItem">About</nuxt-link>
+    </v-layout>
+     
+    <v-card
+      class="mx-auto transform"
+      min-width="1045"
+      max-width="1045"
+    >
+    <v-layout row>
+       <v-flex md8 lg8 xl8>
+        <v-img
+          class="white--text align-end firstCard"
+          height="225px"
+          src="/overHeadStick.jpg"
+        >
+        </v-img>
+      </v-flex>
+      <v-flex md4 lg4 xl4>
+        <!-- TITLE -->
+        <v-card-title>Your Professional Trainer</v-card-title>
+      <v-card-subtitle class="pb-0">Private Consultations Available</v-card-subtitle>
+      <!-- TEXT -->
+      <v-card-text class="text--primary">
+        <div>Get In Touch Today</div>
+        <div>Get In Shape Today</div>
+      </v-card-text>
+      <!-- BUTTONS -->
+      <v-card-actions>
+        <v-layout column>
           <v-btn
-            color="primary"
-            nuxt
-            to="/inspire"
+            color="orange"
+            text
           >
-            Continue
+            Book Private Consultation
           </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-flex>
+          
+          <v-btn
+            color="orange"
+            text
+          >
+            Learn More
+          </v-btn>
+        </v-layout>
+      </v-card-actions>
+      </v-flex>
+    </v-layout>
+    </v-card>
   </v-layout>
+  <!-- THREE CARDS -->
+  <v-layout row justify-center class="groupThreeCards">
+    <!-- CARD ONE -->
+    <v-card class="threeCards">
+      <v-img
+        src="/kettleBell.jpg"
+        max-width="325"
+        max-height="230"
+      >
+      </v-img>
+      <h2>
+        This is sample text
+      </h2>
+    </v-card>
+    <!-- CARD TWO -->
+    <v-card class="threeCards">
+      <v-img
+        src="/legsAir.jpg"
+        max-width="325"
+        min-height="230"
+      >
+      </v-img>
+      <h2>
+        This is sample text
+      </h2>
+    </v-card>
+    <!-- CARD THREE -->
+    <v-card class="threeCards">
+      <v-img
+        src="/eldarRings.jpg"
+        max-width="325"
+        min-height="230"
+      >
+      </v-img>
+      <h2>
+        This is sample text
+      </h2>
+    </v-card>
+  </v-layout>
+  <v-layout>
+    <articleCards />
+  </v-layout>
+  </v-container>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-import VuetifyLogo from '~/components/VuetifyLogo.vue'
+import articleCards from '../components/articleCards.vue'
+
 
 export default {
-  components: {
-    Logo,
-    VuetifyLogo
+components: {
+    articleCards,
+  },
+  asyncData (context) {
+    // Check if we are in the editor mode
+    let version = context.query._storyblok || context.isDev ? 'draft' : 'published'
+
+    // Load the JSON from the API
+    return context.app.$storyapi.get('cdn/stories', {
+      version: version,
+      starts_with: 'articles/',
+    })
+    .then((res) => {
+      return {
+        articles: res.data.stories.map(ap => {
+          return {
+            id: ap.slug,
+            title: ap.content.title,
+            posted: ap.content.posted,
+            shortDescription: ap.content.shortDescription,
+            image: ap.content.mainImage,
+            description: ap.content.description,
+            firstImage: ap.content.firstImage,
+            descriptionTwo: ap.content.secondDescription,
+            secondImage: ap.content.secondImage,
+          }
+        })
+      }
+    })
+    .catch((res) => {
+      context.error({ statusCode: res.response.status, message: res.response.data })
+    })
   }
 }
 </script>
+
+<style scoped>
+/* BIG SCREENS */
+.container {
+  position: relative;
+}
+.underFold {
+  margin-top: -225px;
+  z-index: 1;
+}
+.transform:hover {
+  transform: scale(1.03);
+}
+.transform {
+  transition: all 300ms ease;
+  position: relative;
+}
+.navBarLinks {
+  color: white;
+  text-decoration: none;
+  position: relative;
+  
+}
+.navbarTitles {
+  min-width: 1045px;
+  margin-bottom: 25px;
+}
+.blogItem {
+  margin-left: 40px !important;
+}
+.threeCards {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.groupThreeCards {
+  margin-top: 42px;
+  max-width: 1200px;
+}
+</style>

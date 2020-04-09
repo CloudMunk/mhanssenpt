@@ -1,5 +1,28 @@
 const colors = require('vuetify/es5/util/colors').default
+const StoryBlokClient = require('storyblok-js-client')
+  
 
+function dynamicRoutes() {
+  const client = new StoryBlokClient({
+    accessToken: StoryBlokToken
+  })
+  const version = process.env.STORYBLOK_VERSION === 'draft' ? 'draft' : 'published'
+  
+  const routes = client
+      .get('cdn/links', {
+      version
+    })
+    .then((res) => {
+      return Object.values(res.data.links).map((link) => {
+        if (version === 'published' && link.slug.includes('_dev')) {
+          return
+        }
+      })
+    })
+    return Promise.all([routes]).then((values) => {
+      return values.join().split(',')
+    })
+}
 module.exports = {
   mode: 'universal',
   /*
@@ -14,7 +37,8 @@ module.exports = {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto&display=swap' }
     ]
   },
   /*
@@ -41,6 +65,7 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
+    ['storyblok-nuxt', {accessToken: 'wEHDckQosknONjbrpyBKyQtt', cacheProvider: 'memory'}],
   ],
   /*
   ** vuetify module configuration
