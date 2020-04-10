@@ -65,8 +65,13 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/auth',
     ['storyblok-nuxt', {accessToken: 'wEHDckQosknONjbrpyBKyQtt', cacheProvider: 'memory'}],
   ],
+  auth: {
+    // Options
+  },
   /*
   ** vuetify module configuration
   ** https://github.com/nuxt-community/vuetify-module

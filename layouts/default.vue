@@ -37,7 +37,7 @@ export default {
 /* BIG SCREENS */
 .navbar {
   min-height: 435px;
-  background-image: url('/navbarImage.jpg');
+  background-image: url('/backgroundImage.jpg');
   background-size: cover;
   z-index: 0;
   position: relative;
