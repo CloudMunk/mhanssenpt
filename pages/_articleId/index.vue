@@ -42,47 +42,47 @@
                 <v-layout justify-center>
                     <h1 class="mt-5 titleMobile"> {{ title }} </h1>
                 </v-layout>
-                <!-- TITLE FOR THE ARTICLE MOBILE -->  
-                <v-layout justify-center>
+                TITLE FOR THE ARTICLE MOBILE -->  
+                <!-- <v-layout justify-center>
                         <v-card class="introCardMobile">
                             <h4 class="introductionMobile">
                                     {{ intro }}
                             </h4>
                         </v-card> 
-                </v-layout>
+                </v-layout> -->
                 <!-- FEATURE IMAGE -->
-                <div class="article-image--mobile" :style="{backgroundImage: 'url('+ mainImage +')'}">
-                </div>
+                <!-- <div class="article-image--mobile" :style="{backgroundImage: 'url('+ mainImage +')'}">
+                </div> -->
                 <!-- SUBS FEATURED -->
-                <v-layout justify-center v-if="posted">
+                <!-- <v-layout justify-center v-if="posted">
                     <p class="mt-2 subsMobile"> {{ posted }} </p>
-                </v-layout>
+                </v-layout> -->
                 <!-- LAYOUT UNDERNEATH -->
-                <v-layout>
-                    <v-flex>
+                <!-- <v-layout>
+                    <v-flex> -->
                     <!-- SECTION ONE -->
-                        <v-layout v-if="description">
+                        <!-- <v-layout v-if="description"> -->
                         <!-- FIRST PARAGRAPH -->
-                            <p class="article--description mt-5"> {{ description }} </p>
+                            <!-- <p class="article--description mt-5"> {{ description }} </p>
                         </v-layout>
-                        <v-layout v-if="secondImage">
+                        <v-layout v-if="secondImage"> -->
                             <!-- SECOND IMAGE -->
-                            <v-img 
+                            <!-- <v-img 
                                 
                                 :src="secondImage"
                             >
                             </v-img>
-                        </v-layout>
+                        </v-layout> -->
                     <!-- SECTION TWO -->
-                        <v-layout v-if="descriptionTwo">
+                        <!-- <v-layout v-if="descriptionTwo"> -->
                             <!-- SECOND PARAGRAPH -->
-                            <p class="thirdDescriptionMobile mt-5">
+                            <!-- <p class="thirdDescriptionMobile mt-5">
                                 {{ descriptionTwo }}
                             </p>
                         </v-layout>
                     </v-flex>
                 </v-layout>
-            </v-flex>
+            </v-flex> -->
         <!-- </v-layout> -->
     </v-container> 
     

@@ -14,6 +14,19 @@
     >
         <nuxt-link to="/" class="navBarLinks">Home</nuxt-link>
         <nuxt-link to="About" class="navBarLinks blogItem">About</nuxt-link>
+        <v-spacer />
+        <v-layout v-if="$auth.loggedIn">
+          <!-- Username -->
+          {{ $auth.user.email }}
+          <!-- Log out button -->
+          <v-btn text>Logout</v-btn>
+        </v-layout>
+        <v-layout v-else justify-end>
+          <!-- Login -->
+          <v-btn to="/login" text>Login</v-btn>
+          <!-- Register -->
+          <v-btn to="/logout" text>Register</v-btn>
+        </v-layout>
     </v-layout>
      
     <v-card
@@ -155,4 +168,9 @@ components: {
 .bodyHome {
   background: white !important;
 }
+/* .userBtns {
+  position: absolute;
+  right: 0;
+  margin-right: 35px;
+} */
 </style>
