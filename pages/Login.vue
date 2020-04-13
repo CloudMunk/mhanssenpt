@@ -7,9 +7,12 @@
 </template>
 
 <script>
-import UserAuthForm from '/@components/UserAuthForm'
+import UserAuthForm from '../components/UserAuthForm'
 
 export default {
+  components: {
+    UserAuthForm
+  },
   data() {
     return {
       login: {

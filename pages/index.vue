@@ -17,7 +17,7 @@
         <v-spacer />
         <v-layout v-if="$auth.loggedIn">
           <!-- Username -->
-          {{ $auth.user.email }}
+          {{ user }}
           <!-- Log out button -->
           <v-btn text>Logout</v-btn>
         </v-layout>
@@ -98,6 +98,11 @@ import articleCards from '../components/articleCards.vue'
 export default {
 components: {
     articleCards,
+  },
+  mounted() {
+    console.log('Dispatching in progress')
+    this.$store.dispatch('loadAllUsers')
+     console.log('Dispatch sent')
   },
   asyncData (context) {
     // Check if we are in the editor mode
