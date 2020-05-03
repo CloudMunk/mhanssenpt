@@ -4,12 +4,17 @@
       app
       class="navbar"
     >
-    <h1 class="logoNavbar">
-      Marius Hanssen <br> Personal Trainer
-    </h1>
+    
+      <h1 class="logoNavbar">
+        <nuxt-link to="/" style="text-decoration: none;">
+        Marius Hanssen <br> 
+        Personal Trainer
+          </nuxt-link>
+      </h1>
+  
     </v-app-bar>
-    <v-content>
-      <v-container>
+    <v-content style="background-color: #FFFFFF;">
+      <v-container >
         <nuxt />
       </v-container>
     </v-content>
@@ -23,12 +28,25 @@
 </template>
 
 <script>
+import * as firebase from 'firebase/app';
+import 'firebase/auth'
+
+
 export default {
   data () {
     return {
       
     }
   },
+
+
+  mounted() {
+    firebase.auth().onAuthStateChanged(user => {
+      console.log(user)
+
+      this.user = user
+    })
+  }
 }
 </script>
 

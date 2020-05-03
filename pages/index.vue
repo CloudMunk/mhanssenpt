@@ -1,5 +1,5 @@
 <template class="bodyHome">
-<v-container class="container">
+<v-container class="container" >
   <v-layout
     column
     justify-center
@@ -12,20 +12,21 @@
       justify-start
       class="navbarTitles"
     >
-        <nuxt-link to="/" class="navBarLinks">Home</nuxt-link>
-        <nuxt-link to="About" class="navBarLinks blogItem">About</nuxt-link>
+        <nuxt-link to="/" class="navBarLinks"><h4>Home</h4></nuxt-link>
+        <nuxt-link to="About" class="navBarLinks blogItem"><h4>About</h4></nuxt-link>
         <v-spacer />
-        <v-layout v-if="$auth.loggedIn">
+        <v-layout v-if="user">
           <!-- Username -->
-          {{ user }}
+          <!-- {{ user }} --> 
+          <h4 style="margin-top: 7px; margin-left: 700px;">{{user.displayName}}</h4>
           <!-- Log out button -->
-          <v-btn text>Logout</v-btn>
+          <v-btn text @click="logout"><h4>Logout</h4></v-btn>
         </v-layout>
         <v-layout v-else justify-end>
           <!-- Login -->
           <v-btn to="/login" text>Login</v-btn>
           <!-- Register -->
-          <v-btn to="/logout" text>Register</v-btn>
+          <v-btn to="/register" text>Register</v-btn>
         </v-layout>
     </v-layout>
      
@@ -93,16 +94,37 @@
 
 <script>
 import articleCards from '../components/articleCards.vue'
-
+import * as firebase from 'firebase/app';
+import 'firebase/auth'
 
 export default {
+
+  data() {
+    return {
+      errors: '',
+      user: {},
+
+    }
+  },
 components: {
     articleCards,
   },
   mounted() {
-    console.log('Dispatching in progress')
-    this.$store.dispatch('loadAllUsers')
-     console.log('Dispatch sent')
+    firebase.auth().onAuthStateChanged(user => {
+      console.log('Check if user:', user)
+     
+      this.user = user
+    })
+  },
+   methods: {
+    logout() { 
+      firebase.auth().signOut()
+        .then(result => {
+          console.log('This is the result', result)
+          this.user = ''
+          this.$router.push('/') 
+        })
+    }
   },
   asyncData (context) {
     // Check if we are in the editor mode
@@ -153,7 +175,6 @@ components: {
   color: white;
   text-decoration: none;
   position: relative;
-  
 }
 .navbarTitles {
   min-width: 1045px;

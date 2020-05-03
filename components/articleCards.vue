@@ -3,7 +3,7 @@
             :to="id"
             class="textDeco"
         >
-        <v-layout row class="groupThreeCards">
+        <v-layout row class="groupThreeCards hidden-sm-and-down">
             <!-- BIG SCREENS -->
                     <v-card class="threeCards" min-height="490" max-height="490">
                         <v-img 

@@ -1,5 +1,5 @@
 export default {
-    adultUser: state => {
-      return state.users.filter(user => user.age > 21)
+    userIsMember: state => {
+      return state.users.filter(user => user.member === true)
     }
   }

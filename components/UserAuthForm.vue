@@ -35,7 +35,17 @@ export default {
       } catch (err) {
         console.log(err)
       }
-    }
-  }
+    },
+     async userLogin(){
+       await this.$auth.loginWith("local", {
+          data: {
+            email: this.email,
+            password: this.password
+          }
+        });
+     }
+  },
+  
+   
 }
 </script>

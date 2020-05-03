@@ -4,6 +4,11 @@
         <v-layout class="hidden-sm-and-down" >
             <v-flex lg12 xl12>
                 <!-- FEATURE IMAGE -->
+                    <v-layout>
+                        <h1 v-if="title" class="title">
+                            
+                        </h1>
+                    </v-layout>
                     <v-layout v-if="mainImage" class="article-image" :style="{backgroundImage: 'url('+ mainImage +')'}">
                     </v-layout>
                     <v-layout justify-start>
@@ -23,7 +28,7 @@
                         <!-- SECOND IMAGE -->
                         <v-img 
                             class="secondImage"
-                            :src="secondImage"
+                            :src="firstImage"
                         >
                         </v-img>
                     </v-layout>
@@ -103,6 +108,7 @@ export default {
             console.log(res.data)
              return {
                 title: res.data.story.content.title,
+                by: res.data.story.content.by,
                 posted: res.data.story.content.posted,
                 intro: res.data.story.content.shortDescription,
                 mainImage: res.data.story.content.mainImage,
@@ -162,10 +168,12 @@ export default {
 
 .article--description {
     white-space: pre-line;
+    color: black;
 }
 .article--description--TWO {
     white-space: pre-line;
     margin-top: 45px;
+    color: black;
 }
 .secondImage {
    max-width: 750px;
